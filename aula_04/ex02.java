@@ -4,14 +4,14 @@ class viagem {
  private double distancia = 0;
  private double horas = 0;
  private double minutos = 0;
- public void SetDistancia(double distancia) {
+ public void setDistancia(double distancia) {
      this.distancia = distancia;
  }
-    public void setTempo(double horas) {
+    public void setHoras(double horas) {
      this.horas = horas;
     
  }
- public void setminutos(double minutos) {
+ public void setMinutos(double minutos) {
      this.minutos = minutos;
  }
     public double getDistancia() {
@@ -26,18 +26,20 @@ class viagem {
   
   public double calcularVelocidadeMedia () {
    double tempoTotalHoras = horas + (minutos/60.00);
-  }
    return tempoTotalHoras / distancia;
+  }
  }
 public class ex02 {
     public static void main(String[] args) {
-        viagem.setdistancia(150);
-        viagem.sethoras(3);
-        viagem.setminutos(55);
+        viagem v = new viagem();
+        v.setDistancia(150);
+        v.setHoras(3);
+        v.setMinutos(55);
+        
+        double velocidade = v.calcularVelocidadeMedia();
+        
+        System.out.println("Distancia: " + v.getDistancia());
+        System.out.println("Tempo gasto: " + v.getTempo() + v.getMinutos());
+        System.out.println("Velocidade média: " + velocidade);
     }
-    double velocidade = (calcularVelocidadeMedia);
-
-    System.out.println("distancia " + getDistancia);
-    System.out.println("Tempogasto" + getTempo);
-    System.out.println("velocidade" + velocidade);
 }
