@@ -7,18 +7,18 @@ class viagem {
  public void SetDistancia(double distancia) {
      this.distancia = distancia;
  }
-    public void setTempo(double tempo) {
-   this.tempo = tempo;
+    public void setTempo(double horas) {
+     this.horas = horas;
     
  }
  public void setminutos(double minutos) {
-   this.minutos = minutos;
+     this.minutos = minutos;
  }
     public double getDistancia() {
         return distancia;
     }
     public double getTempo() {
-        return tempo;
+        return horas;
  }
   public double getMinutos () {
      return minutos;
@@ -31,11 +31,11 @@ class viagem {
  }
 public class ex02 {
     public static void main(String[] args) {
-        viagem.setdistancia (150);
-        viagem.sethoras (3);
-        viagem.setminutos (55);
+        viagem.setdistancia(150);
+        viagem.sethoras(3);
+        viagem.setminutos(55);
     }
-    double velocidade = calcularVelocidadeMedia;
+    double velocidade = (calcularVelocidadeMedia);
 
     System.out.println("distancia " + getDistancia);
     System.out.println("Tempogasto" + getTempo);
