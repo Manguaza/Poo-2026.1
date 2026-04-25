@@ -61,6 +61,8 @@ class ClienteDAO:
     def listar(self):
         self.abrir()
         return self.objetos
+    def atualizar(self):
+        
     def salvar(self):
         with open("clientes.json", mode="w") as arquivo:
             json.dump(self.objetos, arquivo, default = vars)                 
