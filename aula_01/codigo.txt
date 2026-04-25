@@ -1,0 +1,45 @@
+import json
+
+class DAO:
+    arquivo = ""  # Será definido pelas classes filhas
+    classe_modelo = None # Será definido pelas classes filhas
+    objetos = []
+
+    @classmethod
+    def inserir(cls, obj):
+        cls.abrir()
+        cls.objetos.append(obj)
+        cls.salvar()
+
+    @classmethod
+    def listar(cls):
+        cls.abrir()
+        return cls.objetos
+
+    @classmethod
+    def listar_id(cls, id):
+        cls.abrir()
+        for obj in cls.objetos:
+            if obj.id == id: return obj
+        return None
+
+    @classmethod
+    def salvar(cls):
+        with open(cls.arquivo, mode="w") as f:
+            # Salva os atributos privados (__dict__) no JSON
+            json.dump(cls.objetos, f, default=lambda o: o.__dict__)
+
+    @classmethod
+    def abrir(cls):
+        cls.objetos = []
+        try:
+            with open(cls.arquivo, mode="r") as f:
+                dicts = json.load(f)
+                for d in dicts:
+                    # Aqui está o truque: usamos a classe_modelo para recriar o objeto
+                    # Precisamos limpar os nomes das chaves do JSON para o construtor
+                    valores = {k.split('__')[-1]: v for k, v in d.items()}
+                    obj = cls.classe_modelo(**valores)
+                    cls.objetos.append(obj)
+        except FileNotFoundError:
+            pass
