@@ -51,31 +51,70 @@ class vendaitem:
   def__str__(self):
        return f"{self.id} - {self.quantidade} - {self.preco} - {self.idvenda} - {self.idproduto}"       
         
+import json
+
+class DAO:
+    arquivo = ""
+    classe_modelo = None
+    objetos = []
+    
+ @classmethod
+ def inserir(cls, obj)
+    cls.abrir()
+    cls.objetos.append(obj)
+    cls.salvar()
+    
+ @classmethod 
+  def listar(cls):
+      cls.abrir()
+      return cls.objetos
+ @classmethod
+ def listar_id(cls, id):
+     cls.abrir()
+     for obj in cls.objetos:
+         if obj.id == id:             
+        
 class ClienteDAO:
     def __init__(self):
-        self.objetos = []
+        objetos = []
     def inserir(self, obj):
-        self.abrir()
-        self.objetos.append(obj)
-        self.salvar()
+        cls.abrir()
+        cls.objetos.append(obj)
+        cls.salvar()
     def listar(self):
-        self.abrir()
-        return self.objetos
-    def atualizar(self):
-        
-    def salvar(self):
+        cls.abrir()
+        return cls.objetos
+    def listar_id(cls, id):
+        cls.abrir()
+        for obj in cls.objetos:
+            if obj id == id: return object
+            return None
+    def atualizar(cls, obj):
+        item = cls.listar_id(obj.id)
+        if item:
+            item.nome = obj.nome
+            item.email = obj.email
+            item.fone = obj.fone
+            cls.salvar()
+     def excluir(cls, obj):
+         item = cls.listar_id(obj.id)
+         if item:
+             cls.objetos.remove(item)
+             cls.salvar()       
+    def salvar(cls):
         with open("clientes.json", mode="w") as arquivo:
-            json.dump(self.objetos, arquivo, default = vars)                 
-    def abrir(self):
+            json.dump(self.objetos, arquivo, default = lambda o: o.__dict__)                 
+    def abrir(cls):
         self.objetos = []
         try:
             with open("clientes.json", mode="r") as arquivo:
                 clientes_json = json.load(arquivo)
                 for obj in clientes_json:
-                    c = Cliente(obj["id"], obj["nome"])
-                    self.objetos.append(c)        
+                    c = Cliente(d["_cliente__id"], obj["_cliente.nome"]
+                                d["_cliente__email], d["_cliente__fone"] ) 
+                    cls.objetos.append(c)        
         except FileNotFoundError:
-            self.objetos = []
+           pass
             
 class UI:
     @staticmethod
