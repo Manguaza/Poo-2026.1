@@ -1,14 +1,56 @@
 import json
 
 class Cliente:
-    def __init__(self, id, nome): #, email, fone):
+    def __init__(self, id, nome, email, fone):
         self.id = id
         self.nome = nome
-        #self.email = email
-        #self.fone = fone
+        self.email = email
+        self.fone = fone
     def __str__(self):
-        return f"{self.id} - {self.nome}" # - {self.email} - {self.fone}"
+        return f"{self.id} - {self.nome} - {self.email} - {self.fone}"
+
+class categoria:
+    def__init__(self, id = int,  descricao = string):
+        self.id = id
+        self.descricao =  string
+        det__str__(self):
+            return "{self.id} - {self.descricao}"
+        
+        
+class venda: 
+  def__init__(self, id = int, data = datatime, carrinho = bool, total = double, idcliente = int):
+      self.id = id
+      self.data = data
+      self.carrinho = carrinho
+      self.total = total
+      self.idcliente = idcliente
+      status = "No carrinho"
+      if self__carrinho
+      else "finaliza"
+      return f"venda {self.id} - {self.data} - {self.total} - {self.status} "
+      
+class produto: 
+    def__init__(self, id = int, descricao = string, preco = double, estoque = int, idcategoria = int)
+    self.id = id
+    self.decricao = descricao
+    self.preco = preco
+    self.estoque = estoque
+    self.idcategoria = categoria
     
+    def__str__(self):
+        return f"{self.id} - {self.descricao} - {self.preco} - {self.estoque}"
+    
+class vendaitem:
+    def__init__(self, id = int, quantidade = int, preco = double, idvenda = int, idproduto = int)
+    self.id = id
+    self.quantidade = quantidade
+    self.preco = preco
+    self.idvenda = idvenda
+    self.idproduto = idproduto
+    
+  def__str__(self):
+       return f"{self.id} - {self.quantidade} - {self.preco} - {self.idvenda} - {self.idproduto}"       
+        
 class ClienteDAO:
     def __init__(self):
         self.objetos = []
