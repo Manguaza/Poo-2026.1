@@ -82,6 +82,26 @@ class DAO:
         return None
 
     @classmethod
+    def atualizar(cls, obj):
+        cls.abrir()
+        for index, existente in enumerate(cls.objetos):
+            if existente.id == obj.id:
+                cls.objetos[index] = obj
+                cls.salvar()
+                return True
+        return False
+
+    @classmethod
+    def excluir(cls, id):
+        cls.abrir()
+        original_length = len(cls.objetos)
+        cls.objetos = [obj for obj in cls.objetos if obj.id != id]
+        if len(cls.objetos) != original_length:
+            cls.salvar()
+            return True
+        return False
+
+    @classmethod
     def salvar(cls):
         with open(cls.arquivo, mode="w") as f:
             json.dump([o.__dict__ for o in cls.objetos], f, indent=2)
@@ -168,12 +188,33 @@ class UI:
     @staticmethod
     def atualizar():
         print("Atualizar cliente")
-        print("Função ainda não implementada.")
+        id = int(input("Informe o id do cliente a atualizar: "))
+        cliente = ClienteDAO.listar_id(id)
+        if cliente is None:
+            print("Cliente não encontrado.")
+            return
+
+        nome = input(f"Informe o nome [{cliente.nome}]: ") or cliente.nome
+        email = input(f"Informe o email [{cliente.email}]: ") or cliente.email
+        fone = input(f"Informe o telefone [{cliente.fone}]: ") or cliente.fone
+
+        cliente.nome = nome
+        cliente.email = email
+        cliente.fone = fone
+
+        if ClienteDAO.atualizar(cliente):
+            print("Cliente atualizado com sucesso.")
+        else:
+            print("Não foi possível atualizar o cliente.")
 
     @staticmethod
     def excluir():
         print("Excluir cliente")
-        print("Função ainda não implementada.")
+        id = int(input("Informe o id do cliente a excluir: "))
+        if ClienteDAO.excluir(id):
+            print("Cliente excluído com sucesso.")
+        else:
+            print("Cliente não encontrado.")
 
 
 if __name__ == "__main__":
