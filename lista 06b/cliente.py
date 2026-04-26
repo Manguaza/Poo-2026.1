@@ -1,150 +1,180 @@
 import json
 
 class Cliente:
-    def __init__(self, id, nome, email, fone):
+    def __init__(self, id: int, nome: str, email: str, fone: str):
         self.id = id
         self.nome = nome
         self.email = email
         self.fone = fone
+
     def __str__(self):
         return f"{self.id} - {self.nome} - {self.email} - {self.fone}"
 
-class categoria:
-    def__init__(self, id = int,  descricao = string):
+
+class Categoria:
+    def __init__(self, id: int = 0, descricao: str = ""):
         self.id = id
-        self.descricao =  string
-        det__str__(self):
-            return "{self.id} - {self.descricao}"
-        
-        
-class venda: 
-  def__init__(self, id = int, data = datatime, carrinho = bool, total = double, idcliente = int):
-      self.id = id
-      self.data = data
-      self.carrinho = carrinho
-      self.total = total
-      self.idcliente = idcliente
-      status = "No carrinho"
-      if self__carrinho
-      else "finaliza"
-      return f"venda {self.id} - {self.data} - {self.total} - {self.status} "
-      
-class produto: 
-    def__init__(self, id = int, descricao = string, preco = double, estoque = int, idcategoria = int)
-    self.id = id
-    self.decricao = descricao
-    self.preco = preco
-    self.estoque = estoque
-    self.idcategoria = categoria
-    
-    def__str__(self):
+        self.descricao = descricao
+
+    def __str__(self):
+        return f"{self.id} - {self.descricao}"
+
+
+class Venda:
+    def __init__(self, id: int = 0, data: str = "", carrinho: bool = True, total: float = 0.0, idcliente: int = 0):
+        self.id = id
+        self.data = data
+        self.carrinho = carrinho
+        self.total = total
+        self.idcliente = idcliente
+        self.status = "No carrinho" if self.carrinho else "Finalizada"
+
+    def __str__(self):
+        return f"Venda {self.id} - {self.data} - {self.total} - {self.status}"
+
+
+class Produto:
+    def __init__(self, id: int = 0, descricao: str = "", preco: float = 0.0, estoque: int = 0, idcategoria: int = 0):
+        self.id = id
+        self.descricao = descricao
+        self.preco = preco
+        self.estoque = estoque
+        self.idcategoria = idcategoria
+
+    def __str__(self):
         return f"{self.id} - {self.descricao} - {self.preco} - {self.estoque}"
-    
-class vendaitem:
-    def__init__(self, id = int, quantidade = int, preco = double, idvenda = int, idproduto = int)
-    self.id = id
-    self.quantidade = quantidade
-    self.preco = preco
-    self.idvenda = idvenda
-    self.idproduto = idproduto
-    
-  def__str__(self):
-       return f"{self.id} - {self.quantidade} - {self.preco} - {self.idvenda} - {self.idproduto}"       
-        
-import json
+
+
+class VendaItem:
+    def __init__(self, id: int = 0, quantidade: int = 0, preco: float = 0.0, idvenda: int = 0, idproduto: int = 0):
+        self.id = id
+        self.quantidade = quantidade
+        self.preco = preco
+        self.idvenda = idvenda
+        self.idproduto = idproduto
+
+    def __str__(self):
+        return f"{self.id} - {self.quantidade} - {self.preco} - {self.idvenda} - {self.idproduto}"
+
 
 class DAO:
     arquivo = ""
     classe_modelo = None
     objetos = []
-    
- @classmethod
- def inserir(cls, obj)
-    cls.abrir()
-    cls.objetos.append(obj)
-    cls.salvar()
-    
- @classmethod 
-  def listar(cls):
-      cls.abrir()
-      return cls.objetos
- @classmethod
- def listar_id(cls, id):
-     cls.abrir()
-     for obj in cls.objetos:
-         if obj.id == id: return object
-         return None
-     
+
     @classmethod
-    def salvar (cls):
-        with open(cls.arquivo mode"w") as f:
-            json.dump(cls.objetos, f, default=lamda o: o.__dict__)
-            
-       @classmethod
-       def abrir(cls):
-           cls.objetos = []
-           try:
-               with open(cls.arquivo, mode="r") as f:
-                   dicts = json.load(f)
-                   for d in dicts:
-                       valores = {k.split("__")[-1]> v for k,v in d.items()}
-                       obj = cls.class_modelo(**valores)
-                       cls.objetos.append(obj)
-           except FileNotFoundError:
-               pass                           
-        
+    def inserir(cls, obj):
+        cls.abrir()
+        cls.objetos.append(obj)
+        cls.salvar()
+
+    @classmethod
+    def listar(cls):
+        cls.abrir()
+        return cls.objetos
+
+    @classmethod
+    def listar_id(cls, id):
+        cls.abrir()
+        for obj in cls.objetos:
+            if obj.id == id:
+                return obj
+        return None
+
+    @classmethod
+    def salvar(cls):
+        with open(cls.arquivo, mode="w") as f:
+            json.dump([o.__dict__ for o in cls.objetos], f, indent=2)
+
+    @classmethod
+    def abrir(cls):
+        cls.objetos = []
+        try:
+            with open(cls.arquivo, mode="r") as f:
+                dicts = json.load(f)
+                for d in dicts:
+                    obj = cls.classe_modelo(**d)
+                    cls.objetos.append(obj)
+        except FileNotFoundError:
+            pass
+
+
 class ClienteDAO(DAO):
     arquivo = "clientes.json"
     classe_modelo = Cliente
     objetos = []
 
+
 class ProdutoDAO(DAO):
-    arquivo = "clientes.json"
-    classe_modelo = Cliente
-    objetos = []
-    
-class CategoriaDAO(DAO):
-    arquivo = "clientes.json"
-    classe_modelo = Cliente
-    objetos = []
-    
-class VendasDAO(DAO):
-    arquivo = "clientes.json"
-    classe_modelo = Cliente
+    arquivo = "produtos.json"
+    classe_modelo = Produto
     objetos = []
 
-class VendaItem(DAO):
-    arquivo = "clientes.json"
-    classe_modelo = Cliente
+
+class CategoriaDAO(DAO):
+    arquivo = "categorias.json"
+    classe_modelo = Categoria
     objetos = []
-            
+
+
+class VendasDAO(DAO):
+    arquivo = "vendas.json"
+    classe_modelo = Venda
+    objetos = []
+
+
+class VendaItemDAO(DAO):
+    arquivo = "venda_itens.json"
+    classe_modelo = VendaItem
+    objetos = []
+
+
 class UI:
     @staticmethod
     def main():
         op = 0
         while op != 9:
             op = UI.menu()
-            if op == 1: UI.inserir()
-            if op == 2: UI.listar()
+            if op == 1:
+                UI.inserir()
+            elif op == 2:
+                UI.listar()
+            elif op == 3:
+                UI.atualizar()
+            elif op == 4:
+                UI.excluir()
+
     @staticmethod
     def menu():
         print("1-Inserir 2-Listar 3-Atualizar 4-Excluir 9-Fim")
         return int(input("Informe uma opção: "))
+
     @staticmethod
-    def inserir():                           # C - Create
+    def inserir():
         print("Cadastro de Clientes")
         id = int(input("Informe o id: "))
         nome = input("Informe o nome: ")
-        c = Cliente(id, nome)
-        ClienteDAO().inserir(c)
+        email = input("Informe o email: ")
+        fone = input("Informe o telefone: ")
+        c = Cliente(id, nome, email, fone)
+        ClienteDAO.inserir(c)
+
     @staticmethod
-    def listar():                            # R - Read
+    def listar():
         print("Listagem de Clientes")
-        for c in ClienteDAO().listar(): print(c)
-    def atualizar():                         # U - Update
-        pass
-    def excluir():                           # D - Delete
-        pass    
+        for c in ClienteDAO.listar():
+            print(c)
 
-UI.main()
+    @staticmethod
+    def atualizar():
+        print("Atualizar cliente")
+        print("Função ainda não implementada.")
 
+    @staticmethod
+    def excluir():
+        print("Excluir cliente")
+        print("Função ainda não implementada.")
+
+
+if __name__ == "__main__":
+    UI.main()
