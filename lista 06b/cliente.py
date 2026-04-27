@@ -1,7 +1,7 @@
 import json
 
 class Cliente:
-    def __init__(self, id: int, nome: str, email: str, fone: str):
+    def __init__(self, id, nome, email, fone):
         self.id = id
         self.nome = nome
         self.email = email
@@ -12,7 +12,7 @@ class Cliente:
 
 
 class Categoria:
-    def __init__(self, id: int = 0, descricao: str = ""):
+    def __init__(self, id descricao):
         self.id = id
         self.descricao = descricao
 
@@ -21,7 +21,7 @@ class Categoria:
 
 
 class Venda:
-    def __init__(self, id: int = 0, data: str = "", carrinho: bool = True, total: float = 0.0, idcliente: int = 0):
+    def __init__(self, id, data, carrinho, total, idcliente):
         self.id = id
         self.data = data
         self.carrinho = carrinho
@@ -34,7 +34,7 @@ class Venda:
 
 
 class Produto:
-    def __init__(self, id: int = 0, descricao: str = "", preco: float = 0.0, estoque: int = 0, idcategoria: int = 0):
+    def __init__(self, id, descricao, preco, estoque, idcategoria):
         self.id = id
         self.descricao = descricao
         self.preco = preco
@@ -46,7 +46,7 @@ class Produto:
 
 
 class VendaItem:
-    def __init__(self, id: int = 0, quantidade: int = 0, preco: float = 0.0, idvenda: int = 0, idproduto: int = 0):
+    def __init__(self, id, quantidade, preco, idvenda, idproduto: int):
         self.id = id
         self.quantidade = quantidade
         self.preco = preco
