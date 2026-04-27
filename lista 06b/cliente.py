@@ -12,7 +12,7 @@ class Cliente:
 
 
 class Categoria:
-    def __init__(self, id descricao):
+    def __init__(self, id, descricao):
         self.id = id
         self.descricao = descricao
 
