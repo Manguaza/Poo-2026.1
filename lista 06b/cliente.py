@@ -46,7 +46,7 @@ class Produto:
 
 
 class VendaItem:
-    def __init__(self, id, quantidade, preco, idvenda, idproduto: int):
+    def __init__(self, id, quantidade, preco, idvenda, idproduto):
         self.id = id
         self.quantidade = quantidade
         self.preco = preco
