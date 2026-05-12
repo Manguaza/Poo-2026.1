@@ -63,3 +63,11 @@ class View: # nenhum print, nenhum input
         c = Categoria(id, "")
         CategoriaDAO().excluir(c)
         
+    @staticmethod
+    def produto_listar():
+        return ProdutoDAO().listar()
+    
+    @staticmethod
+    def produto_listar_id(id):
+        return ProdutoDAO().listar()    
+        

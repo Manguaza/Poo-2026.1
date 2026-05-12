@@ -35,8 +35,8 @@ class UI: # classe estática -> não tem instância
         print("5-Listar minhas compras")
         print("9-Sair")
         op = int(input("Informe uma opção: "))           
-        if op == 1: pass
-        if op == 2: pass
+        if op == 1: UI.produto_listar()
+        if op == 2: UI._cliente_inserir_produto_no_carrinho()
         if op == 3: pass
         if op == 4: pass
         if op == 5: pass
@@ -123,5 +123,33 @@ class UI: # classe estática -> não tem instância
         UI.categoria_listar()
         id = int(input("Informe o id a ser excluído: "))
         View.categoria_excluir(id)
+        
+    def produto_listar():
+        produtos = View.produto_listar()
+        if not produtos:
+            print("nenhum produto cadastrado")
+        else:
+            for p in produtos:
+                print(p)
+    
+    def cliente_inserir_produto_no_carrinho():
+        UI.produto_listar()
+        id_produto = int(input("informe o id do produto: "))
+        quantidade = int(input("informe a quantidade: "))
+        produto = View.produto_listar_id(id_produto)
+        if produto is None:
+            print("produto não encontrado.")
+            return 
+        if quantidade <=0:
+            print("produto não pode ser zero")
+            return
+        if quantidade > produto.estoque:
+            print("não tem produto no estoque")
+            return
+        if id_produto in UI.__carrinho:
+            UI.carrinho[id_produto] += quantidade
+        else:
+            UI.__carrinho[id_produto] = quantidade
+            print("produto adicionado ao carrinho")              
 
 UI.main()
