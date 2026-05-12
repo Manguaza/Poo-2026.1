@@ -1,6 +1,10 @@
 # View acessa as classes do Modelo
 from cliente import Cliente, ClienteDAO
 from categoria import Categoria, CategoriaDAO
+from produto import Produto, ProdutoDAO
+from venda import Venda, VendasDAO
+from vendaitem import VendaItem, VendaItemDAO
+
 
 class View: # nenhum print, nenhum input
     @staticmethod
