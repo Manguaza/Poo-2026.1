@@ -11,7 +11,7 @@ class Cliente:
     def __str__(self):
         return f"{self.id} - {self.nome} - {self.email} - {self.fone}"
     
-class ClienteDAO:
+class ClienteDAO(DAO):
     arquivo = "clientes.json"
     classe_modelo = Cliente
     objetos = []

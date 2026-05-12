@@ -8,7 +8,7 @@ class Categoria:
     def __str__(self):
         return f"{self.id} - {self.descricao}"
     
-class CategoriaDAO:
+class CategoriaDAO(DAO):
     arquivo = "categorias.json"
     classe_modelo = Categoria
     objetos = []

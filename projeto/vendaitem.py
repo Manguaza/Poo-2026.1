@@ -1,3 +1,5 @@
+import json
+from DAO import DAO
 class VendaItem:
     def __init__(self, id, quantidade, preco, idvenda, idproduto):
         self.id = id

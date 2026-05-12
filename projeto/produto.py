@@ -1,3 +1,6 @@
+import json
+from DAO import DAO
+
 class Produto:
     def __init__(self, id, descricao, preco, estoque, idcategoria):
         self.id = id
@@ -10,7 +13,7 @@ class Produto:
         return f"{self.id} - {self.descricao} - {self.preco} - {self.estoque}"
     
     
-class ProdutoDAO:
+class ProdutoDAO (DAO):
     arquivo = "produtos.json"
     classe_modelo = Produto
     objetos = []
