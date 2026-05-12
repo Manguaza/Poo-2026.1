@@ -1,5 +1,8 @@
 #from cliente import Cliente, ClienteDAO
 #from categoria import Categoria, CategoriaDAO
+import os
+import sys
+sys.path.append(os.path.dirname(__file__))
 from views import View
 
 class UI: # classe estática -> não tem instância
@@ -162,10 +165,11 @@ class UI: # classe estática -> não tem instância
         for id_produto, quantidade in UI.__carrinho.items():
             produto = View.produto_listar_id(id_produto)
             if produto is None:
-                print(f"-produto{id_produto} não encontrado no sistema")
+                print(f"-produto {id_produto} não encontrado no sistema")
                 continue
             total_item = produto.preco * quantidade
             total_carrinho += total_item
-            print(f"- {produto.descricao}: R$ {produto.preco:..2f} x {quantidade} = R$ {total_item:.2f}")
-            print(f"total do carrinho: R$ {total_carrinho:.2f}")
+            print(f"- {produto.descricao}: R$ {produto.preco:.2f} x {quantidade} = R$ {total_item:.2f}")
+        print(f"Total do carrinho: R$ {total_carrinho:.2f}")
+
 UI.main()
