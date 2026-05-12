@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "data": "2026-05-12 23:17:49",
+    "carrinho": {
+      "0": 2
+    },
+    "total": 10.0,
+    "idcliente": 0,
+    "status": "No carrinho"
+  }
+]

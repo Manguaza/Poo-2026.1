@@ -69,5 +69,44 @@ class View: # nenhum print, nenhum input
     
     @staticmethod
     def produto_listar_id(id):
-        return ProdutoDAO().listar_id(id)    
+        return ProdutoDAO().listar_id(id)
+    
+    @staticmethod
+    def produto_inserir(descricao, preco, estoque, idcategoria):
+        p = Produto(0, descricao, preco, estoque, idcategoria)
+        ProdutoDAO().inserir(p)
+    
+    @staticmethod
+    def produto_atualizar(id, descricao, preco, estoque, idcategoria):
+        p = Produto(id, descricao, preco, estoque, idcategoria)
+        ProdutoDAO().atualizar(p)
+    
+    @staticmethod
+    def produto_excluir(id):
+        p = Produto(id, "", 0, 0, 0)
+        ProdutoDAO().excluir(id)
+    
+    @staticmethod
+    def venda_inserir(data, carrinho, total, idcliente):
+        v = Venda(0, data, carrinho, total, idcliente)
+        VendasDAO().inserir(v)
+        return v.id  # retornar o id da venda criada
+    
+    @staticmethod
+    def venda_listar():
+        return VendasDAO().listar()
+    
+    @staticmethod
+    def venda_listar_id(id):
+        return VendasDAO().listar_id(id)
+    
+    @staticmethod
+    def venda_listar_por_cliente(idcliente):
+        vendas = VendasDAO().listar()
+        return [v for v in vendas if v.idcliente == idcliente]
+    
+    @staticmethod
+    def vendaitem_inserir(quantidade, preco, idvenda, idproduto):
+        vi = VendaItem(0, quantidade, preco, idvenda, idproduto)
+        VendaItemDAO().inserir(vi)    
         

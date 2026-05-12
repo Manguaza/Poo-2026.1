@@ -8,6 +8,11 @@ class DAO:
     @classmethod
     def inserir(cls, obj):
         cls.abrir()
+        # Auto-increment id
+        if cls.objetos:
+            obj.id = max(o.id for o in cls.objetos) + 1
+        else:
+            obj.id = 1
         cls.objetos.append(obj)
         cls.salvar()
 
