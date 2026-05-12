@@ -2,6 +2,7 @@
 #from categoria import Categoria, CategoriaDAO
 from views import View
 import datetime
+from vendaitem import VendaItem, VendaItemDAO
 
 class UI: # classe estática -> não tem instância
     __usuario = None     
@@ -13,8 +14,7 @@ class UI: # classe estática -> não tem instância
             op = int(input("Informe uma opção: "))           
             if op == 1: UI.visitante_entrar()
             if op == 2: UI.visitante_criar_conta()
-            return op1
-        
+            return op
         except ValueError:
             print("Opção inválida. Digite um número.")
             return 0
@@ -41,8 +41,10 @@ class UI: # classe estática -> não tem instância
             if op == 13: UI.produto_excluir()
             if op == 14: UI.admin_listar_vendas()
             if op == 9: UI.usuario_sair()
+            return op
         except ValueError:
             print("Opção inválida. Digite um número.")
+            return 0
 
     def menu_cliente():
         print("1-Listar produtos")
@@ -59,8 +61,10 @@ class UI: # classe estática -> não tem instância
             if op == 4: UI.cliente_comprar_carrinho()
             if op == 5: UI.cliente_listar_compras()
             if op == 9: UI.usuario_sair()
+            return op
         except ValueError:
             print("Opção inválida. Digite um número.")
+            return 0
 
     @classmethod
     def main(cls):
@@ -83,8 +87,10 @@ class UI: # classe estática -> não tem instância
                 print("IF Comércio Eletrônico 2026.1")
                 print("Bem-vindo(a), " + cls.__usuario["nome"])
                 # menu do usuário: admin ou cliente
-                if admin: UI.menu_admin()
-                else: UI.menu_cliente()
+                if admin:
+                    op = UI.menu_admin()
+                else:
+                    op = UI.menu_cliente()
 
     @classmethod
     def visitante_entrar(cls):

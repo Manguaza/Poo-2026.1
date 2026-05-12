@@ -1,9 +1,9 @@
 [
   {
-    "id": 0,
-    "descricao": "mouse",
-    "preco": 5.0,
-    "estoque": 3998,
+    "id": 1,
+    "descricao": "roxo",
+    "preco": 500.0,
+    "estoque": 500,
     "idcategoria": 0
   }
 ]
