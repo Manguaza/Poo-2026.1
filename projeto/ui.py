@@ -38,7 +38,7 @@ class UI: # classe estática -> não tem instância
         op = int(input("Informe uma opção: "))           
         if op == 1: UI.produto_listar()
         if op == 2: UI.cliente_inserir_produto_no_carrinho()
-        if op == 3: pass
+        if op == 3: UI.cliente_visualizar_carrinho()
         if op == 4: pass
         if op == 5: pass
         if op == 9: UI.usuario_sair()
@@ -145,12 +145,27 @@ class UI: # classe estática -> não tem instância
             print("quantidade deve ser maior que zero.")
             return
         if quantidade > produto.estoque:
-            print("não tem produto no estoque")
+            print("não tem produto suficiente no estoque")
             return
         if id_produto in UI.__carrinho:
             UI.__carrinho[id_produto] += quantidade
         else:
             UI.__carrinho[id_produto] = quantidade
-        print("produto adicionado ao carrinho.")              
+        print("produto adicionado ao carrinho.")
 
+    def cliente_visualizar_carrinho():
+        if not UI.__carrinho:
+            print ("carrinho vazio")
+            return
+        total_carrinho = 0
+        print("produto no carrinho")
+        for id_produto, quantidade in UI.__carrinho.items():
+            produto = View.produto_listar_id(id_produto)
+            if produto is None:
+                print(f"-produto{id_produto} não encontrado no sistema")
+                continue
+            total_item = produto.preco * quantidade
+            total_carrinho += total_item
+            print(f"- {produto.descricao}: R$ {produto.preco:..2f} x {quantidade} = R$ {total_item:.2f}")
+            print(f"total do carrinho: R$ {total_carrinho:.2f}")
 UI.main()
