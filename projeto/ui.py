@@ -140,7 +140,7 @@ class UI: # classe estática -> não tem instância
         if produto is None:
             print("produto não encontrado.")
             return 
-        if quantidade <=0:
+        if quantidade > produto.estoque:
             print("produto não pode ser zero")
             return
         if quantidade > produto.estoque:
