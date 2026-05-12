@@ -4,6 +4,7 @@ from views import View
 
 class UI: # classe estática -> não tem instância
     __usuario = None     
+    __carrinho = {}     
 
     def menu_visitante():
         print("1-Entrar no Sistema, 2-Abrir Conta, 9-Fim")
@@ -36,7 +37,7 @@ class UI: # classe estática -> não tem instância
         print("9-Sair")
         op = int(input("Informe uma opção: "))           
         if op == 1: UI.produto_listar()
-        if op == 2: UI._cliente_inserir_produto_no_carrinho()
+        if op == 2: UI.cliente_inserir_produto_no_carrinho()
         if op == 3: pass
         if op == 4: pass
         if op == 5: pass
@@ -140,16 +141,16 @@ class UI: # classe estática -> não tem instância
         if produto is None:
             print("produto não encontrado.")
             return 
-        if quantidade > produto.estoque:
-            print("produto não pode ser zero")
+        if quantidade <= 0:
+            print("quantidade deve ser maior que zero.")
             return
         if quantidade > produto.estoque:
             print("não tem produto no estoque")
             return
         if id_produto in UI.__carrinho:
-            UI.carrinho[id_produto] += quantidade
+            UI.__carrinho[id_produto] += quantidade
         else:
             UI.__carrinho[id_produto] = quantidade
-            print("produto adicionado ao carrinho")              
+        print("produto adicionado ao carrinho.")              
 
 UI.main()

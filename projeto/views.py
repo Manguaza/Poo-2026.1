@@ -69,5 +69,5 @@ class View: # nenhum print, nenhum input
     
     @staticmethod
     def produto_listar_id(id):
-        return ProdutoDAO().listar()    
+        return ProdutoDAO().listar_id(id)    
         
