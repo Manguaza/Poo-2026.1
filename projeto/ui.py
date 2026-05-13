@@ -1,7 +1,6 @@
 #from cliente import Cliente, ClienteDAO
 #from categoria import Categoria, CategoriaDAO
 from views import View
-import datetime
 from vendaitem import VendaItem, VendaItemDAO
 
 class UI: # classe estática -> não tem instância
@@ -120,7 +119,7 @@ class UI: # classe estática -> não tem instância
 
     def cliente_atualizar():
         UI.cliente_listar()
-        id = int(input("Informe o id a ser atualizado: "))
+        id = (input("Informe o id a ser atualizado: "))
         nome = input("Informe o novo nome: ")
         email = input("Informe o novo e-mail: ")
         fone = input("Informe o novo fone: ")
@@ -208,6 +207,7 @@ class UI: # classe estática -> não tem instância
         else:
             carrinho[id_produto] = quantidade
         print("produto adicionado ao carrinho.")
+        
 
     def cliente_visualizar_carrinho():
         id_usuario = UI.__usuario["id"]
@@ -226,6 +226,7 @@ class UI: # classe estática -> não tem instância
             total_carrinho += total_item
             print(f"- {produto.descricao}: R$ {produto.preco:.2f} x {quantidade} = R$ {total_item:.2f}")
         print(f"Total do carrinho: R$ {total_carrinho:.2f}")
+        
 
     def cliente_comprar_carrinho():
         id_usuario = UI.__usuario["id"]
