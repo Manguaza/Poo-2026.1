@@ -8,5 +8,15 @@
     "total": 10.0,
     "idcliente": 0,
     "status": "No carrinho"
+  },
+  {
+    "id": 2,
+    "data": "2026-05-13 00:40:56",
+    "carrinho": {
+      "1": 1
+    },
+    "total": 500.0,
+    "idcliente": 0,
+    "status": "Finalizada"
   }
 ]

@@ -3,7 +3,7 @@
     "id": 1,
     "descricao": "roxo",
     "preco": 500.0,
-    "estoque": 500,
+    "estoque": 499,
     "idcategoria": 0
   }
 ]

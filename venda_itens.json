@@ -5,5 +5,12 @@
     "preco": 5.0,
     "idvenda": 1,
     "idproduto": 0
+  },
+  {
+    "id": 2,
+    "quantidade": 1,
+    "preco": 500.0,
+    "idvenda": 2,
+    "idproduto": 1
   }
 ]
