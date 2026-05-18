@@ -19,5 +19,19 @@
     "email": "aaa",
     "fone": "aaa",
     "senha": "aaa"
+  },
+  {
+    "id": 1,
+    "nome": "batman",
+    "email": "batman",
+    "fone": "1938",
+    "senha": "bat"
+  },
+  {
+    "id": 2,
+    "nome": "superman",
+    "email": "superman",
+    "fone": "1938",
+    "senha": "super"
   }
 ]

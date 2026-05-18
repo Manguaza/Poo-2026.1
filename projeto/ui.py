@@ -1,6 +1,7 @@
 #from cliente import Cliente, ClienteDAO
 #from categoria import Categoria, CategoriaDAO
 from views import View
+import datetime
 from vendaitem import VendaItem, VendaItemDAO
 
 class UI: # classe estática -> não tem instância

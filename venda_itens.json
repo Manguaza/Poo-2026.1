@@ -19,5 +19,12 @@
     "preco": 500.0,
     "idvenda": 3,
     "idproduto": 1
+  },
+  {
+    "id": 4,
+    "quantidade": 1,
+    "preco": 500.0,
+    "idvenda": 4,
+    "idproduto": 1
   }
 ]
