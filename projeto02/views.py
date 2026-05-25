@@ -1,9 +1,9 @@
 # View acessa as classes do Modelo
-from cliente import Cliente, ClienteDAO
-from categoria import Categoria, CategoriaDAO
-from produto import Produto, ProdutoDAO
-from venda import Venda, VendasDAO
-from vendaitem import VendaItem, VendaItemDAO
+from models.cliente import Cliente, ClienteDAO
+from models.categoria import Categoria, CategoriaDAO
+from models.produto import Produto, ProdutoDAO
+from models.venda import Venda, VendasDAO
+from models.vendaitem import VendaItem, VendaItemDAO
 
 
 class View: # nenhum print, nenhum input

@@ -1,5 +1,5 @@
 from templates.mantercategoria import ManterCategoriaUI
-from templates.mantercliente import ManterClienteUI
+from templates.manterclientes import ManterClienteUI
 from templates.manterproduto import ManterProdutoUI
 from templates.reajustarproduto import ReajustarProdutoUI
 from templates.loginUI import LoginUI

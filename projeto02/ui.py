@@ -1,4 +1,4 @@
-from views import View
+from projeto02.views import View
 from uiadmin import UIAdmin
 from uicliente import UICliente
 
