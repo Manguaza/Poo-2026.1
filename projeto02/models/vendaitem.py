@@ -1,16 +1,13 @@
 from .DAO import DAO
 
 
-class Venda:
-    def __init__(self, id, data, carrinho, total, idcliente, status=None, id_entregador=0, status_entrega="Aguardando alocacao"):
+class VendaItem:
+    def __init__(self, id, quantidade, preco, idvenda, idproduto):
         self.id = id
-        self.data = data
-        self.carrinho = carrinho
-        self.total = total
-        self.idcliente = idcliente
-        self.status = status if status is not None else ("Finalizada" if self.carrinho else "No carrinho")
-        self.id_entregador = id_entregador
-        self.status_entrega = status_entrega
+        self.quantidade = quantidade
+        self.preco = preco
+        self.idvenda = idvenda
+        self.idproduto = idproduto
 
     @property
     def id(self):
@@ -20,101 +17,67 @@ class Venda:
     def id(self, valor):
         valor = int(valor)
         if valor < 0:
-            raise ValueError("Id da venda nao pode ser negativo")
+            raise ValueError("Id do item da venda nao pode ser negativo")
         self.__id = valor
 
     @property
-    def data(self):
-        return self.__data
+    def quantidade(self):
+        return self.__quantidade
 
-    @data.setter
-    def data(self, valor):
-        valor = str(valor).strip()
-        if valor == "":
-            raise ValueError("Data da venda e obrigatoria")
-        self.__data = valor
-
-    @property
-    def carrinho(self):
-        return self.__carrinho
-
-    @carrinho.setter
-    def carrinho(self, valor):
-        self.__carrinho = valor if valor is not None else {}
+    @quantidade.setter
+    def quantidade(self, valor):
+        valor = int(valor)
+        if valor <= 0:
+            raise ValueError("Quantidade deve ser maior que zero")
+        self.__quantidade = valor
 
     @property
-    def total(self):
-        return self.__total
+    def preco(self):
+        return self.__preco
 
-    @total.setter
-    def total(self, valor):
+    @preco.setter
+    def preco(self, valor):
         valor = float(valor)
         if valor < 0:
-            raise ValueError("Total da venda nao pode ser negativo")
-        self.__total = valor
+            raise ValueError("Preco do item da venda nao pode ser negativo")
+        self.__preco = valor
 
     @property
-    def idcliente(self):
-        return self.__idcliente
+    def idvenda(self):
+        return self.__idvenda
 
-    @idcliente.setter
-    def idcliente(self, valor):
+    @idvenda.setter
+    def idvenda(self, valor):
         valor = int(valor)
-        if valor < 0:
-            raise ValueError("Venda deve possuir cliente")
-        self.__idcliente = valor
+        if valor <= 0:
+            raise ValueError("Id da venda do item deve ser maior que zero")
+        self.__idvenda = valor
 
     @property
-    def status(self):
-        return self.__status
+    def idproduto(self):
+        return self.__idproduto
 
-    @status.setter
-    def status(self, valor):
-        valor = str(valor).strip()
-        if valor not in ["No carrinho", "Finalizada", "Cancelada"]:
-            raise ValueError("Status da venda invalido")
-        self.__status = valor
-
-    @property
-    def id_entregador(self):
-        return self.__id_entregador
-
-    @id_entregador.setter
-    def id_entregador(self, valor):
-        valor = int(valor or 0)
-        if valor < 0:
-            raise ValueError("Id do entregador nao pode ser negativo")
-        self.__id_entregador = valor
-
-    @property
-    def status_entrega(self):
-        return self.__status_entrega
-
-    @status_entrega.setter
-    def status_entrega(self, valor):
-        valor = str(valor).strip()
-        permitidos = ["Aguardando alocacao", "Preparando", "Saiu para entrega", "Entregue", "Cancelada"]
-        if valor not in permitidos:
-            raise ValueError("Status de entrega invalido")
-        self.__status_entrega = valor
+    @idproduto.setter
+    def idproduto(self, valor):
+        valor = int(valor)
+        if valor <= 0:
+            raise ValueError("Id do produto do item deve ser maior que zero")
+        self.__idproduto = valor
 
     def __str__(self):
-        return f"Venda {self.id} - {self.data} - {self.total} - {self.status}"
+        return f"{self.id} - {self.quantidade} x {self.preco:.2f} - Venda {self.idvenda} - Produto {self.idproduto}"
 
     def to_json(self):
         return {
             "id": self.id,
-            "data": self.data,
-            "carrinho": self.carrinho,
-            "total": self.total,
-            "idcliente": self.idcliente,
-            "status": self.status,
-            "id_entregador": self.id_entregador,
-            "status_entrega": self.status_entrega
+            "quantidade": self.quantidade,
+            "preco": self.preco,
+            "idvenda": self.idvenda,
+            "idproduto": self.idproduto
         }
 
 
-class VendasDAO(DAO):
-    arquivo = "vendas.json"
-    classe_modelo = Venda
+class VendaItemDAO(DAO):
+    arquivo = "venda_itens.json"
+    classe_modelo = VendaItem
     objetos = []

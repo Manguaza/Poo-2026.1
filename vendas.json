@@ -7,7 +7,9 @@
     },
     "total": 10.0,
     "idcliente": 0,
-    "status": "No carrinho"
+    "status": "No carrinho",
+    "id_entregador": 0,
+    "status_entrega": "Aguardando alocacao"
   },
   {
     "id": 2,
@@ -17,7 +19,9 @@
     },
     "total": 500.0,
     "idcliente": 0,
-    "status": "Finalizada"
+    "status": "Finalizada",
+    "id_entregador": 0,
+    "status_entrega": "Aguardando alocacao"
   },
   {
     "id": 3,
@@ -27,7 +31,9 @@
     },
     "total": 500.0,
     "idcliente": 0,
-    "status": "Finalizada"
+    "status": "Finalizada",
+    "id_entregador": 0,
+    "status_entrega": "Aguardando alocacao"
   },
   {
     "id": 4,
@@ -37,6 +43,44 @@
     },
     "total": 500.0,
     "idcliente": 2,
-    "status": "Finalizada"
+    "status": "Finalizada",
+    "id_entregador": 0,
+    "status_entrega": "Aguardando alocacao"
+  },
+  {
+    "id": 5,
+    "data": "2026-06-10 18:23:53",
+    "carrinho": {
+      "1": 1
+    },
+    "total": 500.0,
+    "idcliente": 0,
+    "status": "Finalizada",
+    "id_entregador": 0,
+    "status_entrega": "Aguardando alocacao"
+  },
+  {
+    "id": 6,
+    "data": "2026-06-10 18:23:59",
+    "carrinho": {
+      "1": 1
+    },
+    "total": 500.0,
+    "idcliente": 0,
+    "status": "Finalizada",
+    "id_entregador": 0,
+    "status_entrega": "Aguardando alocacao"
+  },
+  {
+    "id": 7,
+    "data": "2026-06-10 18:24:10",
+    "carrinho": {
+      "1": 1
+    },
+    "total": 500.0,
+    "idcliente": 0,
+    "status": "Finalizada",
+    "id_entregador": 0,
+    "status_entrega": "Aguardando alocacao"
   }
 ]

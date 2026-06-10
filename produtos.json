@@ -2,8 +2,9 @@
   {
     "id": 1,
     "descricao": "roxo",
-    "preco": 500.0,
+    "preco": 520.2,
     "estoque": 497,
-    "idcategoria": 0
+    "idcategoria": 0,
+    "imagem": ""
   }
 ]
