@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from views import View
+from view import View
 import time
 
 class ManterClienteUI:
@@ -63,3 +63,5 @@ class ManterClienteUI:
                 st.success("Cliente excluído com sucesso")
                 time.sleep(2)
                 st.rerun()
+
+                

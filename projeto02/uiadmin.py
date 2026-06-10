@@ -1,4 +1,4 @@
-from views import View
+from view import View
 
 class UIAdmin: # classe estática -> não tem instância
     def menu():
@@ -60,4 +60,3 @@ class UIAdmin: # classe estática -> não tem instância
         UIAdmin.categoria_listar()
         id = int(input("Informe o id a ser excluído: "))
         View.categoria_excluir(id)
-

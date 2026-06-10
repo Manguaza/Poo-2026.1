@@ -1,4 +1,4 @@
-from views import View
+from view import View
 
 class UICliente: # classe estática -> não tem instância
     def menu():

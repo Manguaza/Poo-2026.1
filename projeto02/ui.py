@@ -1,4 +1,4 @@
-from projeto02.views import View
+from view import View
 from uiadmin import UIAdmin
 from uicliente import UICliente
 
@@ -28,7 +28,7 @@ class UI: # classe estática -> não tem instância
                 op = UI.menu_visitante()
             else:
                 # usuário está logado, verifica se é o admin
-                admin = cls.__usuario["nome"] == "admin"
+                admin = cls.__usuario["email"] == "admin"
                 # mensagem de bem-vindo
                 print("IF Comércio Eletrônico 2026.1")
                 print("Bem-vindo(a), " + cls.__usuario["nome"])

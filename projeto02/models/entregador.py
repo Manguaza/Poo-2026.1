@@ -1,13 +1,13 @@
 from .DAO import DAO
 
 
-class Cliente:
-    def __init__(self, id, nome, email, fone, senha):
+class Entregador:
+    def __init__(self, id, nome, email, fone, veiculo):
         self.id = id
         self.nome = nome
         self.email = email
         self.fone = fone
-        self.senha = senha
+        self.veiculo = veiculo
 
     @property
     def id(self):
@@ -17,7 +17,7 @@ class Cliente:
     def id(self, valor):
         valor = int(valor)
         if valor < 0:
-            raise ValueError("Id do cliente nao pode ser negativo")
+            raise ValueError("Id do entregador nao pode ser negativo")
         self.__id = valor
 
     @property
@@ -28,7 +28,7 @@ class Cliente:
     def nome(self, valor):
         valor = str(valor).strip()
         if valor == "":
-            raise ValueError("Nome do cliente e obrigatorio")
+            raise ValueError("Nome do entregador e obrigatorio")
         self.__nome = valor
 
     @property
@@ -38,8 +38,8 @@ class Cliente:
     @email.setter
     def email(self, valor):
         valor = str(valor).strip().lower()
-        if valor == "":
-            raise ValueError("E-mail do cliente invalido")
+        if valor == "" or "@" not in valor:
+            raise ValueError("E-mail do entregador invalido")
         self.__email = valor
 
     @property
@@ -51,33 +51,18 @@ class Cliente:
         self.__fone = str(valor).strip()
 
     @property
-    def senha(self):
-        return self.__senha
+    def veiculo(self):
+        return self.__veiculo
 
-    @senha.setter
-    def senha(self, valor):
+    @veiculo.setter
+    def veiculo(self, valor):
         valor = str(valor).strip()
         if valor == "":
-            raise ValueError("Senha do cliente e obrigatoria")
-        self.__senha = valor
+            raise ValueError("Veiculo do entregador e obrigatorio")
+        self.__veiculo = valor
 
     def __str__(self):
-        return f"{self.id} - {self.nome} - {self.email} - {self.fone}"
-
-    def get_id(self):
-        return self.id
-
-    def get_nome(self):
-        return self.nome
-
-    def get_email(self):
-        return self.email
-
-    def get_fone(self):
-        return self.fone
-
-    def get_senha(self):
-        return self.senha
+        return f"{self.id} - {self.nome} - {self.veiculo}"
 
     def to_json(self):
         return {
@@ -85,11 +70,11 @@ class Cliente:
             "nome": self.nome,
             "email": self.email,
             "fone": self.fone,
-            "senha": self.senha
+            "veiculo": self.veiculo
         }
 
 
-class ClienteDAO(DAO):
-    arquivo = "clientes.json"
-    classe_modelo = Cliente
+class EntregadorDAO(DAO):
+    arquivo = "entregadores.json"
+    classe_modelo = Entregador
     objetos = []

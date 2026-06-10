@@ -1,5 +1,6 @@
 import json
 
+
 class DAO:
     arquivo = ""
     classe_modelo = None
@@ -8,7 +9,6 @@ class DAO:
     @classmethod
     def inserir(cls, obj):
         cls.abrir()
-        # Auto-increment id
         if cls.objetos:
             obj.id = max(o.id for o in cls.objetos) + 1
         else:
@@ -24,8 +24,9 @@ class DAO:
     @classmethod
     def listar_id(cls, id):
         cls.abrir()
+        id = int(id)
         for obj in cls.objetos:
-            if obj.id == id:
+            if int(obj.id) == id:
                 return obj
         return None
 
@@ -33,7 +34,7 @@ class DAO:
     def atualizar(cls, obj):
         cls.abrir()
         for index, existente in enumerate(cls.objetos):
-            if existente.id == obj.id:
+            if int(existente.id) == int(obj.id):
                 cls.objetos[index] = obj
                 cls.salvar()
                 return True
@@ -42,8 +43,9 @@ class DAO:
     @classmethod
     def excluir(cls, id):
         cls.abrir()
+        id = int(id)
         original_length = len(cls.objetos)
-        cls.objetos = [obj for obj in cls.objetos if obj.id != id]
+        cls.objetos = [obj for obj in cls.objetos if int(obj.id) != id]
         if len(cls.objetos) != original_length:
             cls.salvar()
             return True
@@ -52,7 +54,7 @@ class DAO:
     @classmethod
     def salvar(cls):
         with open(cls.arquivo, mode="w") as f:
-            json.dump([o.__dict__ for o in cls.objetos], f, indent=2)
+            json.dump([o.to_json() if hasattr(o, "to_json") else o.__dict__ for o in cls.objetos], f, indent=2)
 
     @classmethod
     def abrir(cls):
@@ -61,6 +63,7 @@ class DAO:
             with open(cls.arquivo, mode="r") as f:
                 dicts = json.load(f)
                 for d in dicts:
+                    d = {k[1:] if k.startswith("_") else k: v for k, v in d.items()}
                     obj = cls.classe_modelo(**d)
                     cls.objetos.append(obj)
         except FileNotFoundError:
