@@ -82,5 +82,41 @@
     "status": "Finalizada",
     "id_entregador": 0,
     "status_entrega": "Aguardando alocacao"
+  },
+  {
+    "id": 8,
+    "data": "2026-06-14 22:46:56",
+    "carrinho": {
+      "1": 1
+    },
+    "total": 520.2,
+    "idcliente": 2,
+    "status": "Finalizada",
+    "id_entregador": 0,
+    "status_entrega": "Aguardando alocacao"
+  },
+  {
+    "id": 9,
+    "data": "2026-06-14 22:49:25",
+    "carrinho": {
+      "1": 1
+    },
+    "total": 520.2,
+    "idcliente": 4,
+    "status": "Finalizada",
+    "id_entregador": 1,
+    "status_entrega": "Preparando"
+  },
+  {
+    "id": 10,
+    "data": "2026-06-14 23:01:09",
+    "carrinho": {
+      "2": 1
+    },
+    "total": 2017.6,
+    "idcliente": 4,
+    "status": "No carrinho",
+    "id_entregador": 0,
+    "status_entrega": "Aguardando alocacao"
   }
 ]

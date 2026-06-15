@@ -26,5 +26,19 @@
     "preco": 500.0,
     "idvenda": 4,
     "idproduto": 1
+  },
+  {
+    "id": 5,
+    "quantidade": 1,
+    "preco": 520.2,
+    "idvenda": 8,
+    "idproduto": 1
+  },
+  {
+    "id": 6,
+    "quantidade": 1,
+    "preco": 520.2,
+    "idvenda": 9,
+    "idproduto": 1
   }
 ]

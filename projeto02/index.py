@@ -133,16 +133,24 @@ class IndexUI:
 
     def inserir_produto_no_carrinho():
         st.header("Inserir Produto no Carrinho")
+        IndexUI.__criar_carrinho()
         produtos = [p for p in View.produto_listar() if p.estoque > 0]
         if len(produtos) == 0:
             st.write("Nenhum produto disponivel")
             return
 
         produto = st.selectbox("Produto", produtos)
+        carrinho = st.session_state["carrinho"]
+        quantidade_no_carrinho = int(carrinho.get(produto.id, 0))
+        quantidade_disponivel = int(produto.estoque) - quantidade_no_carrinho
         preco_venda, promocao = View.produto_preco_venda(produto)
         IndexUI.__mostrar_imagem(produto.imagem, 220)
-        quantidade = st.number_input("Quantidade", min_value=1, max_value=int(produto.estoque), step=1)
         st.write(f"Estoque disponivel: {produto.estoque}")
+        st.write(f"No carrinho: {quantidade_no_carrinho}")
+        if quantidade_disponivel <= 0:
+            st.warning("Todo o estoque disponivel deste produto ja esta no carrinho")
+            return
+        quantidade = st.number_input("Quantidade", min_value=1, max_value=quantidade_disponivel, step=1)
         if promocao:
             st.write(f"Preco original: R$ {produto.preco:.2f}")
             st.write(f"Preco promocional: R$ {preco_venda:.2f}")
@@ -150,12 +158,12 @@ class IndexUI:
             st.write(f"Preco unitario: R$ {preco_venda:.2f}")
         if st.button("Adicionar ao carrinho"):
             try:
-                IndexUI.__criar_carrinho()
-                carrinho = st.session_state["carrinho"]
                 quantidade_anterior = carrinho.get(produto.id, 0)
                 carrinho[produto.id] = carrinho.get(produto.id, 0) + int(quantidade)
                 View.carrinho_validar(carrinho)
+                View.carrinho_salvar_do_cliente(st.session_state["cliente_id"], carrinho)
                 st.success("Produto adicionado ao carrinho")
+                st.rerun()
             except Exception as erro:
                 if quantidade_anterior == 0:
                     carrinho.pop(produto.id, None)
@@ -177,6 +185,7 @@ class IndexUI:
             st.subheader(f"Total: R$ {total:.2f}")
             if st.button("Limpar carrinho"):
                 st.session_state["carrinho"] = {}
+                View.carrinho_limpar_do_cliente(st.session_state["cliente_id"])
                 st.rerun()
         except Exception as erro:
             st.error(erro)
@@ -221,7 +230,10 @@ class IndexUI:
 
     def __criar_carrinho():
         if "carrinho" not in st.session_state:
-            st.session_state["carrinho"] = {}
+            if "cliente_id" in st.session_state and st.session_state.get("cliente_email") != "admin":
+                st.session_state["carrinho"] = View.carrinho_obter_do_cliente(st.session_state["cliente_id"])
+            else:
+                st.session_state["carrinho"] = {}
 
     def __linhas_carrinho(itens):
         linhas = []

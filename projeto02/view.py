@@ -264,10 +264,10 @@ class View:
         EntregadorDAO().excluir(id)
 
     @staticmethod
-    def venda_inserir(data, carrinho, total, idcliente):
+    def venda_inserir(data, carrinho, total, idcliente, status="Finalizada"):
         if View.cliente_listar_id(idcliente) is None:
             raise ValueError("Cliente da venda nao encontrado")
-        v = Venda(0, data, carrinho, total, idcliente)
+        v = Venda(0, data, carrinho, total, idcliente, status)
         VendasDAO().inserir(v)
         return v.id
 
@@ -335,6 +335,44 @@ class View:
         return [item for item in View.vendaitem_listar() if int(item.idvenda) == idvenda]
 
     @staticmethod
+    def carrinho_obter_do_cliente(idcliente):
+        venda = View.__carrinho_venda_do_cliente(idcliente)
+        if venda is None:
+            return {}
+        return {int(k): int(v) for k, v in venda.carrinho.items()}
+
+    @staticmethod
+    def carrinho_salvar_do_cliente(idcliente, carrinho):
+        idcliente = int(idcliente)
+        if View.cliente_listar_id(idcliente) is None:
+            raise ValueError("Cliente do carrinho nao encontrado")
+
+        carrinho = {int(k): int(v) for k, v in carrinho.items() if int(v) > 0}
+        total = 0
+        if carrinho:
+            _, total = View.carrinho_validar(carrinho)
+
+        venda = View.__carrinho_venda_do_cliente(idcliente)
+        if venda is None:
+            data = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            venda = Venda(0, data, carrinho, total, idcliente, "No carrinho")
+            VendasDAO().inserir(venda)
+            return venda.id
+
+        venda.carrinho = carrinho
+        venda.total = total
+        VendasDAO().atualizar(venda)
+        return venda.id
+
+    @staticmethod
+    def carrinho_limpar_do_cliente(idcliente):
+        venda = View.__carrinho_venda_do_cliente(idcliente)
+        if venda is not None:
+            venda.carrinho = {}
+            venda.total = 0
+            VendasDAO().atualizar(venda)
+
+    @staticmethod
     def carrinho_validar(carrinho):
         if not carrinho:
             raise ValueError("Carrinho vazio")
@@ -365,9 +403,20 @@ class View:
 
     @staticmethod
     def comprar_carrinho(idcliente, carrinho):
+        idcliente = int(idcliente)
         itens, total = View.carrinho_validar(carrinho)
         data = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        idvenda = View.venda_inserir(data, {int(k): int(v) for k, v in carrinho.items()}, total, int(idcliente))
+        venda = View.__carrinho_venda_do_cliente(idcliente)
+        if venda is None:
+            idvenda = View.venda_inserir(data, {int(k): int(v) for k, v in carrinho.items()}, total, idcliente)
+        else:
+            venda.data = data
+            venda.carrinho = {int(k): int(v) for k, v in carrinho.items()}
+            venda.total = total
+            venda.status = "Finalizada"
+            venda.status_entrega = "Aguardando alocacao"
+            VendasDAO().atualizar(venda)
+            idvenda = venda.id
         for item in itens:
             produto = item["produto"]
             quantidade = item["quantidade"]
@@ -381,6 +430,14 @@ class View:
                 produto.imagem,
             )
         return idvenda, total
+
+    @staticmethod
+    def __carrinho_venda_do_cliente(idcliente):
+        idcliente = int(idcliente)
+        for venda in VendasDAO().listar():
+            if venda.idcliente == idcliente and venda.status == "No carrinho":
+                return venda
+        return None
 
     @staticmethod
     def __normalizar_data(valor):

@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "idcategoria": 1,
+    "inicio": "2026-06-15",
+    "fim": "2026-06-16",
+    "percentual": 10.01
+  },
+  {
+    "id": 2,
+    "idcategoria": 1,
+    "inicio": "2026-06-14",
+    "fim": "2026-06-14",
+    "percentual": 40.0
+  }
+]

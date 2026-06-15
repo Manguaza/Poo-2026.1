@@ -1,10 +1,26 @@
 [
   {
     "id": 1,
-    "descricao": "roxo",
-    "preco": 520.2,
-    "estoque": 497,
+    "descricao": "anel do lanterna verde",
+    "preco": 562.64832,
+    "estoque": 495,
     "idcategoria": 0,
-    "imagem": ""
+    "imagem": "projeto02/uploads/produtos/20260614230549751268_b10aebf9519aabed4e4a06b72318465c.png"
+  },
+  {
+    "id": 2,
+    "descricao": "action figure flash",
+    "preco": 2098.304,
+    "estoque": 1940,
+    "idcategoria": 1,
+    "imagem": "projeto02/uploads/produtos/20260614225311490758_estatua-dc-collectibles-designer-series-the-flash-by-francis-manapul-34523-img_84574_1.jpg"
+  },
+  {
+    "id": 3,
+    "descricao": "batarang",
+    "preco": 1900.0,
+    "estoque": 1930,
+    "idcategoria": 2,
+    "imagem": "projeto02/uploads/produtos/20260614231229246679_batman-beyond-batarangs-vs-batman-new-adventures-batarangs-v0-irwr2ktgc4df1.png"
   }
 ]

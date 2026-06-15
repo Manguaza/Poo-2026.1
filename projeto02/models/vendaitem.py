@@ -28,7 +28,7 @@ class VendaItem:
     def quantidade(self, valor):
         valor = int(valor)
         if valor <= 0:
-            raise ValueError("Quantidade deve ser maior que zero")
+            raise ValueError("Quantidade do item deve ser maior que zero")
         self.__quantidade = valor
 
     @property
@@ -38,8 +38,8 @@ class VendaItem:
     @preco.setter
     def preco(self, valor):
         valor = float(valor)
-        if valor < 0:
-            raise ValueError("Preco do item da venda nao pode ser negativo")
+        if valor <= 0:
+            raise ValueError("Preco do item deve ser maior que zero")
         self.__preco = valor
 
     @property
@@ -50,7 +50,7 @@ class VendaItem:
     def idvenda(self, valor):
         valor = int(valor)
         if valor <= 0:
-            raise ValueError("Id da venda do item deve ser maior que zero")
+            raise ValueError("Item deve possuir venda")
         self.__idvenda = valor
 
     @property
@@ -60,12 +60,9 @@ class VendaItem:
     @idproduto.setter
     def idproduto(self, valor):
         valor = int(valor)
-        if valor <= 0:
-            raise ValueError("Id do produto do item deve ser maior que zero")
+        if valor < 0:
+            raise ValueError("Item deve possuir produto")
         self.__idproduto = valor
-
-    def __str__(self):
-        return f"{self.id} - {self.quantidade} x {self.preco:.2f} - Venda {self.idvenda} - Produto {self.idproduto}"
 
     def to_json(self):
         return {
